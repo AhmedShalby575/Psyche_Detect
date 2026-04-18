@@ -270,32 +270,37 @@ def extract_national_id(nid):
 # ─── Pages ────────────────────────────────────────────────────────────────────
 
 def page_home():
-    # Header bar
-    c1, c2, c3 = st.columns([1, 1, 1])
-    with c1:
-        if st.button("🌐 AR" if not IS_AR else "🌐 EN", key="lang_btn"):
+    # Header — both buttons in one HTML row to avoid mobile stacking
+    lang_label = "🌐 AR" if not IS_AR else "🌐 EN"
+    about_label = t("عن التطبيق", "About")
+    st.markdown(f"""
+    <div style='display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;'>
+        <div style='flex:1'></div>
+        <div style='flex:1; text-align:right; color:rgba(255,255,255,0.5); font-size:13px;'></div>
+    </div>
+    """, unsafe_allow_html=True)
+    col_l, col_mid, col_r = st.columns([2, 3, 2])
+    with col_l:
+        if st.button(lang_label, key="lang_btn"):
             st.session_state.lang = "en" if IS_AR else "ar"
             st.rerun()
-    with c3:
-        if st.button(t("عن التطبيق", "About"), key="about_btn"):
+    with col_r:
+        if st.button(about_label, key="about_btn"):
             go("about")
 
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    # Logo & Title
-    col1, col2, col3 = st.columns([1, 1, 1])
-    with col2:
+    # Logo small and centered
+    col = st.columns([2, 3, 2])[1]
+    with col:
         try:
             st.image("assets/psyera_logo_home.png", width=120)
-        except FileNotFoundError:
-            st.markdown("<div style='font-size:72px; text-align:center;'>🧠</div>", unsafe_allow_html=True)
+        except:
+            st.markdown("<div style='font-size:56px;text-align:center;'>🧠</div>", unsafe_allow_html=True)
 
     st.markdown("""
     <div style='text-align:center; margin:0 0 4px 0;'>
         <span style='font-size:46px; font-weight:900; background: linear-gradient(90deg,#667eea,#f093fb,#764ba2); -webkit-background-clip:text; -webkit-text-fill-color:transparent;'>PsyEra</span>
     </div>
     """, unsafe_allow_html=True)
-
     subtitle = t("الكشف المبكر عن الاضطرابات النفسية", "Early Detection of Mental Health Disorders")
     st.markdown(f"<p style='text-align:center; color:rgba(255,255,255,0.65); font-size:15px;'>{subtitle}</p>", unsafe_allow_html=True)
 
@@ -796,7 +801,8 @@ MDD، Bipolar I، GAD، Schizophrenia، Anorexia Nervosa، SUD، Panic Disorder�
         <div style='text-align:center; padding:32px;'>
             <div style='font-size:60px;'>🧠</div>
             <p style='color:rgba(255,255,255,0.7); font-size:15px; line-height:1.6;'>
-                {t('مرحباً! أنا الدوك 👋<br>أنا هنا لدعمك، تحدث معي براحتك', "Hello! I'm Doc 👋<br>I'm here to support you, speak freely")}            </p>
+                {t('مرحباً! أنا الدوك 👋<br>أنا هنا لدعمك، تحدث معي براحتك', "Hello! I'm Doc 👋<br>I'm here to support you, speak freely")}
+            </p>
         </div>
         """, unsafe_allow_html=True)
 
