@@ -320,31 +320,9 @@ def page_home():
         if st.button(t("توقعات الانتشار", "Forecasts", "Prévisions"), key="forecast_btn", use_container_width=True):
             go("forecast")
 
-    # Reviews — circle star button centered
     st.markdown("<br style='margin:4px'>", unsafe_allow_html=True)
-    st.markdown("""
-    <style>
-    div[data-testid="stButton"] button[kind="secondary"]#reviews_circle_btn,
-    div.reviews-circle-wrap > div > button {
-        width: 60px !important;
-        height: 60px !important;
-        border-radius: 50% !important;
-        padding: 0 !important;
-        font-size: 26px !important;
-        border: 2px solid #FFD700 !important;
-        background: rgba(255,215,0,0.10) !important;
-        display: flex; align-items:center; justify-content:center;
-    }
-    div[data-testid="stButton"]:has(button[key="reviews_btn"]) {
-        display: flex;
-        justify-content: center;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-    st.markdown("<div style='display:flex; justify-content:center;'>", unsafe_allow_html=True)
-    if st.button("⭐", key="reviews_btn", use_container_width=False):
+    if st.button("⭐", key="reviews_btn", use_container_width=True):
         go("reviews")
-    st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown(f"<div class='footer-text'>PsyEra v1.0 | Bioinformatics Graduation Project 2026</div>", unsafe_allow_html=True)
 
