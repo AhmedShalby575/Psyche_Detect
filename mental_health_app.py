@@ -935,7 +935,8 @@ def save_assessment(scores):
 
 def page_chat():
     """AI chat assistant (Psyer/بصير) using Groq API, with daily limit and multilingual prompts."""
-    GROQ_KEY = ""  # Set via environment variable or Streamlit secrets
+    import os
+    GROQ_KEY = os.environ.get("GROQ_KEY", "") # Set via environment variable or Streamlit secrets
     DAILY_LIMIT = 15
     SYSTEM_PROMPT = (
         'أنت "بصير" (psyer)، المساعد الذكي والودود لتطبيق PsyEra للصحة النفسية.\n\n'
