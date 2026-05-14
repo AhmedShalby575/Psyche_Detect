@@ -324,6 +324,27 @@ def page_home():
     if st.button("⭐", key="reviews_btn", use_container_width=True):
         go("reviews")
 
+    st.markdown("<br style='margin:4px'>", unsafe_allow_html=True)
+    download_label = t("حمّل تطبيق PsyEra الآن", "Download PsyEra App Now", "Télécharger l'app PsyEra")
+    text_dir = t("rtl", "ltr", "ltr")
+    st.markdown(f"""
+    <div style='text-align:center;'>
+        <a href='https://drive.google.com/uc?export=download&id=1ES6mL8DbNc-Hjv12BDYwzvPAoCxWE1YM' target='_blank' style='
+            display:block;
+            width:100%;
+            padding:14px;
+            background: linear-gradient(90deg,#667eea,#764ba2);
+            color:white;
+            font-size:16px;
+            font-weight:700;
+            border-radius:12px;
+            text-decoration:none;
+            letter-spacing:0.5px;
+            direction:{text_dir};
+        '>{download_label}</a>
+    </div>
+    """, unsafe_allow_html=True)
+
     st.markdown(f"<div class='footer-text'>PsyEra v1.0 | Bioinformatics Graduation Project 2026</div>", unsafe_allow_html=True)
 
 
