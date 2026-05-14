@@ -14,9 +14,7 @@ import math
 from datetime import datetime
 from data.questions import get_questions, build_flow, score_answers
 from data.disorders import disorders
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4
-from reportlab.lib.units import mm
+
 
 # ─── Page Config ──────────────────────────────────────────────────────────────
 st.set_page_config(
