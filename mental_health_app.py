@@ -260,7 +260,7 @@ def extract_national_id(nid):
 # ─── Page functions ──────────────────────────────────────────────────────────
 def page_home():
     """Render the home screen with logo, title, and main action buttons."""
-    lang_label = t("🌐 AR", "🌐 EN", "🌐 FR")
+    lang_label = t("AR", "EN", "FR")
     about_label = t("عن التطبيق", "About", "À propos")
     col_l, col_mid, col_r = st.columns([2, 3, 2])
     with col_l:
@@ -297,27 +297,27 @@ def page_home():
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    if st.button(t("🧠 ابدأ التقييم", "🧠 Start Assessment", "🧠 Commencer l'évaluation"), key="start_btn", use_container_width=True):
+    if st.button(t("ابدأ التقييم", "Start Assessment", "Commencer l'évaluation"), key="start_btn", use_container_width=True):
         go("disclaimer")
 
     st.markdown("<br style='margin:4px'>", unsafe_allow_html=True)
 
-    if st.button(t("🤖 اسأل بصير", "🤖 Ask the Psyer", "🤖 Demander au Psyer"), key="chat_btn", use_container_width=True):
+    if st.button(t("اسأل بصير", "Ask the Psyer", "Demander au Psyer"), key="chat_btn", use_container_width=True):
         go("chat")
 
     st.markdown("<br style='margin:4px'>", unsafe_allow_html=True)
 
-    if st.button(t("👨‍⚕️ كلم الدوك", "👨‍⚕️ Talk to the Doc", "👨‍⚕️ Parler au Doc"), key="doctor_btn", use_container_width=True):
+    if st.button(t("كلم الدوك", "Talk to the Doc", "Parler au Doc"), key="doctor_btn", use_container_width=True):
         go("doctor")
 
     st.markdown("<br style='margin:4px'>", unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
     with col1:
-        if st.button(t("📊 إحصائيات", "📊 Statistics", "📊 Statistiques"), key="stats_btn", use_container_width=True):
+        if st.button(t("إحصائيات", "Statistics", "Statistiques"), key="stats_btn", use_container_width=True):
             go("stats")
     with col2:
-        if st.button(t("📈 توقعات الانتشار", "📈 Forecasts", "📈 Prévisions"), key="forecast_btn", use_container_width=True):
+        if st.button(t("توقعات الانتشار", "Forecasts", "Prévisions"), key="forecast_btn", use_container_width=True):
             go("forecast")
 
     # Reviews — circle star button centered
@@ -335,12 +335,16 @@ def page_home():
         background: rgba(255,215,0,0.10) !important;
         display: flex; align-items:center; justify-content:center;
     }
+    div[data-testid="stButton"]:has(button[key="reviews_btn"]) {
+        display: flex;
+        justify-content: center;
+    }
     </style>
     """, unsafe_allow_html=True)
-    _, col_mid_rev, _ = st.columns([3, 1, 3])
-    with col_mid_rev:
-        if st.button("⭐", key="reviews_btn", use_container_width=False):
-            go("reviews")
+    st.markdown("<div style='display:flex; justify-content:center;'>", unsafe_allow_html=True)
+    if st.button("⭐", key="reviews_btn", use_container_width=False):
+        go("reviews")
+    st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown(f"<div class='footer-text'>PsyEra v1.0 | Bioinformatics Graduation Project 2026</div>", unsafe_allow_html=True)
 
@@ -376,15 +380,16 @@ def page_about():
         supervisors = sup_en
 
     st.markdown(f"<div class='psyera-card' style='text-align:center;'><b style='color:#667eea; font-size:15px;'>{t('فريق العمل','Team','Équipe')}</b><br><br>" +
-                "<br>".join([f"<span style='color:rgba(255,255,255,0.85);'>• {m}</span>" for m in team]) + "</div>", unsafe_allow_html=True)
+                "<br>".join([f"<span style='color:rgba(255,255,255,0.85);'>{m}</span>" for m in team]) + "</div>", unsafe_allow_html=True)
 
     st.markdown(f"<div class='psyera-card' style='text-align:center;'><b style='color:#667eea; font-size:15px;'>{t('إشراف','Supervision','Supervision')}</b><br><br>" +
-                "<br>".join([f"<span style='color:rgba(255,255,255,0.85);'>• {s}</span>" for s in supervisors]) + "</div>", unsafe_allow_html=True)
+                "<br>".join([f"<span style='color:rgba(255,255,255,0.85);'>{s}</span>" for s in supervisors]) + "</div>", unsafe_allow_html=True)
 
     try:
-        col = st.columns([1,2,1])[1]
-        with col:
-            st.image("assets/faculty_logo.png", width=120)
+        import base64, pathlib
+        logo_bytes = pathlib.Path("assets/faculty_logo.png").read_bytes()
+        logo_b64 = base64.b64encode(logo_bytes).decode()
+        st.markdown(f"<div style='text-align:center;'><img src='data:image/png;base64,{logo_b64}' style='width:120px;'></div>", unsafe_allow_html=True)
     except:
         pass
 
@@ -411,7 +416,7 @@ def page_disclaimer():
         )
     ), unsafe_allow_html=True)
 
-    if st.button(t("✅ فهمت، متابعة", "✅ Understood, Continue", "✅ Compris, continuer"), key="disc_ok", use_container_width=True):
+    if st.button(t("فهمت، متابعة", "Understood, Continue", "Compris, continuer"), key="disc_ok", use_container_width=True):
         go("mode")
 
 def page_mode():
@@ -426,7 +431,7 @@ def page_mode():
     </div>
     """, unsafe_allow_html=True)
 
-    if st.button(t("🧠 الاضطرابات النفسية — 11 اضطراباً", "🧠 Mental Health Disorders — 11 Disorders", "🧠 Troubles mentaux — 11 troubles"), key="mode_mental", use_container_width=True):
+    if st.button(t("الاضطرابات النفسية — 11 اضطراباً", "Mental Health Disorders — 11 Disorders", "Troubles mentaux — 11 troubles"), key="mode_mental", use_container_width=True):
         go("age_select")
 
     st.markdown(f"""
@@ -602,17 +607,17 @@ def page_quiz():
     cur = st.session_state.answers.get(qi, "")
     c1, c2, c3 = st.columns(3)
     with c1:
-        if st.button(f"✅ {t('نعم','Yes','Oui')}", key=f"ans_yes_{pos}", use_container_width=True):
+        if st.button(t('نعم','Yes','Oui'), key=f"ans_yes_{pos}", use_container_width=True):
             st.session_state.answers[qi] = "yes"
             st.session_state.quiz_pos += 1
             st.rerun()
     with c2:
-        if st.button(f"🔸 {t('أحياناً','Sometimes','Parfois')}", key=f"ans_some_{pos}", use_container_width=True):
+        if st.button(t('أحياناً','Sometimes','Parfois'), key=f"ans_some_{pos}", use_container_width=True):
             st.session_state.answers[qi] = "sometimes"
             st.session_state.quiz_pos += 1
             st.rerun()
     with c3:
-        if st.button(f"❌ {t('لا','No','Non')}", key=f"ans_no_{pos}", use_container_width=True):
+        if st.button(t('لا','No','Non'), key=f"ans_no_{pos}", use_container_width=True):
             st.session_state.answers[qi] = "no"
             st.session_state.quiz_pos += 1
             st.rerun()
@@ -826,7 +831,7 @@ def page_result():
             </div>
             """, unsafe_allow_html=True)
 
-            btn_label = t("▲ إخفاء", "▲ Hide", "▲ Masquer") if st.session_state[exp_key] else t("📖 تعرف على المرض", "📖 Learn More", "📖 En savoir plus")
+            btn_label = t("▲ إخفاء", "▲ Hide", "▲ Masquer") if st.session_state[exp_key] else t("تعرف على المرض", "Learn More", "En savoir plus")
             if st.button(btn_label, key=f"toggle_{key}"):
                 st.session_state[exp_key] = not st.session_state[exp_key]
                 st.rerun()
@@ -882,11 +887,7 @@ def page_result():
     </div>
     """, unsafe_allow_html=True)
 
-    if top_disorders:
-        if st.button(t("📄 تحميل التقرير", "📄 Download Report", "📄 Télécharger le rapport"), key="result_pdf", use_container_width=True):
-            _generate_pdf_report(scores)
-
-    if st.button(t("🏠 القائمة الرئيسية","🏠 Home","🏠 Accueil"), key="result_home", use_container_width=True):
+    if st.button(t("القائمة الرئيسية","Home","Accueil"), key="result_home", use_container_width=True):
         for k in ["answers","quiz_pos","duration","scores","name","gender","national_id","nid_age","nid_gender","governorate","age_group"]:
             if k in ["answers"]:
                 st.session_state[k] = {}
