@@ -321,7 +321,7 @@ def page_home():
             go("forecast")
 
     st.markdown("<br style='margin:4px'>", unsafe_allow_html=True)
-    if st.button("⭐", key="reviews_btn", use_container_width=True):
+    if st.button(t("التقييمات", "Reviews", "Évaluations"), key="reviews_btn", use_container_width=True):
         go("reviews")
 
     st.markdown("<br style='margin:4px'>", unsafe_allow_html=True)
