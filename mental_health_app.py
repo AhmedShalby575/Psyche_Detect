@@ -329,7 +329,7 @@ def page_home():
     text_dir = t("rtl", "ltr", "ltr")
     st.markdown(f"""
     <div style='text-align:center;'>
-        <a href='https://drive.google.com/uc?export=download&id=1ES6mL8DbNc-Hjv12BDYwzvPAoCxWE1YM' target='_blank' style='
+        <a href='https://drive.google.com/uc?export=download&id=1zJyhgIYHYrSQg0pG2u3UuRgDsByV_NKX' target='_blank' style='
             display:block;
             width:100%;
             padding:14px;
